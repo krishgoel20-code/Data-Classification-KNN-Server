@@ -65,11 +65,11 @@
 
         <section class="card-panel">
             <div class="card-title">🚀 Welcome</div>
-            <p class="welcome-text">This AI system predicts Iris flower species using Machine Learning algorithms[cite: 7].</p>
+            <p class="welcome-text">This AI system predicts Iris flower species using Machine Learning algorithms.</p>
             <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 600;">Features</h3>
             <ul class="features-grid">
-                <li>Real-time Flower Prediction [cite: 24]</li>
-                <li>AI Confidence Score [cite: 31]</li>
+                <li>Real-time Flower Prediction</li>
+                <li>AI Confidence Score</li>
                 <li>Download PDF Report</li>
                 <li>Modern Responsive UI</li>
             </ul>
@@ -86,7 +86,7 @@
             </div>
             <div class="stat-item">
                 <div class="stat-label">Dataset Samples</div>
-                <div class="stat-number">150 [cite: 90]</div>
+                <div class="stat-number">150</div>
             </div>
         </section>
 
@@ -173,6 +173,14 @@
             fetch(`/predict?sl=${sl}&sw=${sw}&pl=${pl}&pw=${pw}`)
                 .then(response => response.text())
                 .then(responseText => {
+                    // Safety check to ensure we aren't displaying raw error page source text
+                    if(responseText.includes("<!DOCTYPE") || responseText.includes("Cannot GET")) {
+                        resLabel.innerText = "Engine Routing Error";
+                        confLabel.innerText = "0%";
+                        confBox.style.display = "block";
+                        return;
+                    }
+
                     if(responseText.includes(",")) {
                         const dataParts = responseText.split(",");
                         resLabel.innerText = dataParts[0];

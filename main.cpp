@@ -102,12 +102,16 @@ int main() {
                 predicted_species = vote.first;
             }
         }
-    int confidence_percentage = (max_votes * 100) / 5;
-            string confidence_str = to_string(confidence_percentage) + "%";
 
-            lower(predicted_species);
+        int confidence_percentage = (max_votes * 100) / 5;
+        string confidence_str = to_string(confidence_percentage) + "%";
 
-        return crow::response(predicted_species + "," + confidence_str);
+        lower(predicted_species);
+
+        // Package both values securely with essential browser CORS clearance rules
+        crow::response res(predicted_species + "," + confidence_str);
+        res.set_header("Access-Control-Allow-Origin", "*");
+        return res;
     });
 
     char* port = getenv("PORT");

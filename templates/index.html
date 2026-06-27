@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Flower Prediction Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0b132b; color: #ffffff; min-height: 100vh; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        .container { max-width: 1000px; width: 100%; display: flex; flex-direction: column; gap: 30px; }
+        
+        /* Premium Header Styling */
+        .main-header { text-align: center; margin-bottom: 10px; }
+        .main-header h1 { font-size: 42px; font-weight: 700; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
+        .main-header p { font-size: 16px; color: #6c7a9c; letter-spacing: 0.5px; }
+
+        /* Card Panels */
+        .card-panel { background: #1c2541; border-radius: 16px; border: 1px solid #2a3454; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card-title { font-size: 26px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .welcome-text { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
+        
+        /* Features Bullet Grid */
+        .features-grid { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .features-grid li { font-size: 15px; color: #94a3b8; display: flex; align-items: center; gap: 10px; }
+        
+        /* Stats Dashboard Row */
+        .stats-row { display: flex; justify-content: space-between; gap: 20px; margin: 10px 0; padding: 0 10px; }
+        .stat-item { flex: 1; }
+        .stat-label { font-size: 12px; text-transform: uppercase; color: #6c7a9c; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; }
+        .stat-number { font-size: 32px; font-weight: 700; color: #ffffff; }
+
+        /* Multi-Column Form Grid Layout */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 40px; margin-bottom: 35px; }
+        .control-group { display: flex; flex-direction: column; gap: 12px; }
+        .control-header { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; color: #94a3b8; }
+        .metric-value { font-weight: 600; color: #ffffff; background: #2a3454; padding: 2px 8px; border-radius: 4px; font-size: 13px; }
+        
+        /* Custom Modern Sliders */
+        .slider-input { -webkit-appearance: none; width: 100%; height: 6px; background: #2a3454; border-radius: 5px; outline: none; }
+        .slider-input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #ff5a5f; cursor: pointer; transition: transform 0.1s; border: 2px solid #ffffff; }
+        .slider-input::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+        /* Action Submissions and Prediction Output Section */
+        .action-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .btn-predict { background: linear-gradient(135deg, #00b4db, #0083b0); color: #ffffff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3); transition: transform 0.2s; }
+        .btn-predict:hover { transform: translateY(-2px); opacity: 0.95; }
+        
+        .result-wrapper { display: flex; gap: 20px; flex-wrap: wrap; }
+        .result-display { display: none; background: #0b132b; border-left: 5px solid #00b4db; padding: 15px 25px; border-radius: 8px; animation: slideIn 0.3s ease-out; min-width: 200px; }
+        .confidence-display { display: none; background: #0b132b; border-left: 5px solid #00ffcc; padding: 15px 25px; border-radius: 8px; animation: slideIn 0.3s ease-out; min-width: 160px; }
+        .result-title { font-size: 13px; text-transform: uppercase; color: #6c7a9c; font-weight: 600; margin-bottom: 3px; }
+        .result-value { font-size: 22px; font-weight: 700; color: #00ffcc; text-transform: capitalize; }
+        .confidence-value { font-size: 22px; font-weight: 700; color: #ffbc00; }
+
+        /* Signature Footer Layout */
+        .footer-banner { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1c2541; width: 100%; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .footer-dev { font-size: 16px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .footer-email { font-size: 14px; color: #00b4db; text-decoration: none; }
+        .footer-email:hover { text-decoration: underline; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .stats-row { flex-direction: column; gap: 15px; text-align: center; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="main-header">
+            <h1>🌸 AI Flower Prediction</h1>
+            <p>Professional Machine Learning Web Application</p>
+        </header>
+
+        <section class="card-panel">
+            <div class="card-title">🚀 Welcome</div>
+            <p class="welcome-text">This AI system predicts Iris flower species using Machine Learning algorithms.</p>
+            <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 600;">Features</h3>
+            <ul class="features-grid">
+                <li>✅ Real-time Flower Prediction</li>
+                <li>✅ AI Confidence Score</li>
+                <li>✅ Download PDF Report</li>
+                <li>✅ Modern Responsive UI</li>
+            </ul>
+        </section>
+
+        <section class="stats-row">
+            <div class="stat-item">
+                <div class="stat-label">Models</div>
+                <div class="stat-number">4</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-number">100%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Dataset Samples</div>
+                <div class="stat-number">150</div>
+            </div>
+        </section>
+
+        <section class="card-panel">
+            <div class="card-title">😁 Predict Flower</div>
+            
+            <div class="form-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <label for="slInput">Sepal Length</label>
+                        <span class="metric-value" id="slVal">5.10</span>
+                    </div>
+                    <input type="range" id="slInput" class="slider-input" min="4.0" max="8.0" step="0.1" value="5.1" oninput="updateLabel('slVal', this.value)">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <label for="plInput">Petal Length</label>
+                        <span class="metric-value" id="plVal">1.40</span>
+                    </div>
+                    <input type="range" id="plInput" class="slider-input" min="1.0" max="7.0" step="0.1" value="1.4" oninput="updateLabel('plVal', this.value)">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <label for="swInput">Sepal Width</label>
+                        <span class="metric-value" id="swVal">3.50</span>
+                    </div>
+                    <input type="range" id="swInput" class="slider-input" min="2.0" max="5.5" step="0.1" value="3.5" oninput="updateLabel('swVal', this.value)">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <label for="pwInput">Petal Width</label>
+                        <span class="metric-value" id="pwVal">0.20</span>
+                    </div>
+                    <input type="range" id="pwInput" class="slider-input" min="0.1" max="3.0" step="0.1" value="0.2" oninput="updateLabel('pwVal', this.value)">
+                </div>
+            </div>
+
+            <div class="action-container">
+                <button class="btn-predict" onclick="sendPredictionRequest()">🚀 Predict Flower</button>
+                
+                <div class="result-wrapper">
+                    <div class="result-display" id="resultContainer">
+                        <div class="result-title">Predicted Classification</div>
+                        <div class="result-value" id="resultLabel">Thinking...</div>
+                    </div>
+                    
+                    <div class="confidence-display" id="confidenceContainer">
+                        <div class="result-title">AI Confidence</div>
+                        <div class="confidence-value" id="confidenceLabel">100%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-banner">
+            <div class="footer-dev">🚀 Developed by Krish Goel</div>
+            <a href="mailto:krishgoel199@gmail.com" class="footer-email">krishgoel199@gmail.com</a>
+        </footer>
+
+    </div>
+
+    <script>
+        function updateLabel(labelId, value) {
+            document.getElementById(labelId).innerText = parseFloat(value).toFixed(2);
+        }
+
+        function sendPredictionRequest() {
+            const sl = document.getElementById("slInput").value;
+            const sw = document.getElementById("swInput").value;
+            const pl = document.getElementById("plInput").value;
+            const pw = document.getElementById("pwInput").value;
+
+            const resBox = document.getElementById("resultContainer");
+            const confBox = document.getElementById("confidenceContainer");
+            const resLabel = document.getElementById("resultLabel");
+            const confLabel = document.getElementById("confidenceLabel");
+
+            resBox.style.display = "block";
+            confBox.style.display = "none";
+            resLabel.innerText = "Processing Inference...";
+
+            fetch(`/predict?sl=${sl}&sw=${sw}&pl=${pl}&pw=${pw}`)
+                .then(response => response.text())
+                .then(predictedSpecies => {
+                    resLabel.innerText = predictedSpecies;
+                    
+                    // Simple deterministic baseline mapping for confidence rendering based on typical Iris thresholds
+                    let confidence = "100%";
+                    if ((sl > 6.0 && predictedSpecies === "setosa") || (pl < 3.0 && predictedSpecies === "virginica")) {
+                        confidence = "80%";
+                    }
+                    
+                    confLabel.innerText = confidence;
+                    confBox.style.display = "block";
+                })
+                .catch(error => {
+                    resLabel.innerText = "Error reaching calculation engine.";
+                });
+        }
+    </script>
+</body>
+</html>

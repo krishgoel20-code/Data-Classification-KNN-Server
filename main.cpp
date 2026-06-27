@@ -102,9 +102,12 @@ int main() {
                 predicted_species = vote.first;
             }
         }
-        lower(predicted_species);
+    int confidence_percentage = (max_votes * 100) / 5;
+            string confidence_str = to_string(confidence_percentage) + "%";
 
-        return crow::response(predicted_species);
+            lower(predicted_species);
+
+        return crow::response(predicted_species + "," + confidence_str);
     });
 
     char* port = getenv("PORT");

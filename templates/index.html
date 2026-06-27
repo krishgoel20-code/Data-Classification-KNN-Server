@@ -10,38 +10,31 @@
         
         .container { max-width: 1000px; width: 100%; display: flex; flex-direction: column; gap: 30px; }
         
-        /* Premium Header Styling */
         .main-header { text-align: center; margin-bottom: 10px; }
         .main-header h1 { font-size: 42px; font-weight: 700; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
         .main-header p { font-size: 16px; color: #6c7a9c; letter-spacing: 0.5px; }
 
-        /* Card Panels */
         .card-panel { background: #1c2541; border-radius: 16px; border: 1px solid #2a3454; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .card-title { font-size: 26px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
         .welcome-text { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
         
-        /* Features Bullet Grid */
         .features-grid { list-style: none; display: flex; flex-direction: column; gap: 12px; }
         .features-grid li { font-size: 15px; color: #94a3b8; display: flex; align-items: center; gap: 10px; }
         
-        /* Stats Dashboard Row */
         .stats-row { display: flex; justify-content: space-between; gap: 20px; margin: 10px 0; padding: 0 10px; }
         .stat-item { flex: 1; }
         .stat-label { font-size: 12px; text-transform: uppercase; color: #6c7a9c; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; }
         .stat-number { font-size: 32px; font-weight: 700; color: #ffffff; }
 
-        /* Multi-Column Form Grid Layout */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 40px; margin-bottom: 35px; }
         .control-group { display: flex; flex-direction: column; gap: 12px; }
         .control-header { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; color: #94a3b8; }
         .metric-value { font-weight: 600; color: #ffffff; background: #2a3454; padding: 2px 8px; border-radius: 4px; font-size: 13px; }
         
-        /* Custom Modern Sliders */
         .slider-input { -webkit-appearance: none; width: 100%; height: 6px; background: #2a3454; border-radius: 5px; outline: none; }
         .slider-input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #ff5a5f; cursor: pointer; transition: transform 0.1s; border: 2px solid #ffffff; }
         .slider-input::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
-        /* Action Submissions and Prediction Output Section */
         .action-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
         .btn-predict { background: linear-gradient(135deg, #00b4db, #0083b0); color: #ffffff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3); transition: transform 0.2s; }
         .btn-predict:hover { transform: translateY(-2px); opacity: 0.95; }
@@ -53,7 +46,6 @@
         .result-value { font-size: 22px; font-weight: 700; color: #00ffcc; text-transform: capitalize; }
         .confidence-value { font-size: 22px; font-weight: 700; color: #ffbc00; }
 
-        /* Signature Footer Layout */
         .footer-banner { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1c2541; width: 100%; display: flex; flex-direction: column; gap: 8px; align-items: center; }
         .footer-dev { font-size: 16px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 8px; }
         .footer-email { font-size: 14px; color: #00b4db; text-decoration: none; }
@@ -66,7 +58,6 @@
 <body>
 
     <div class="container">
-        
         <header class="main-header">
             <h1>🌸 AI Flower Prediction</h1>
             <p>Professional Machine Learning Web Application</p>
@@ -74,13 +65,13 @@
 
         <section class="card-panel">
             <div class="card-title">🚀 Welcome</div>
-            <p class="welcome-text">This AI system predicts Iris flower species using Machine Learning algorithms.</p>
+            <p class="welcome-text">This AI system predicts Iris flower species using Machine Learning algorithms[cite: 7].</p>
             <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 600;">Features</h3>
             <ul class="features-grid">
-                <li>✅ Real-time Flower Prediction</li>
-                <li>✅ AI Confidence Score</li>
-                <li>✅ Download PDF Report</li>
-                <li>✅ Modern Responsive UI</li>
+                <li>Real-time Flower Prediction [cite: 24]</li>
+                <li>AI Confidence Score [cite: 31]</li>
+                <li>Download PDF Report</li>
+                <li>Modern Responsive UI</li>
             </ul>
         </section>
 
@@ -95,7 +86,7 @@
             </div>
             <div class="stat-item">
                 <div class="stat-label">Dataset Samples</div>
-                <div class="stat-number">150</div>
+                <div class="stat-number">150 [cite: 90]</div>
             </div>
         </section>
 
@@ -105,7 +96,7 @@
             <div class="form-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <label for="slInput">Sepal Length</label>
+                        <label for="slInput">Sepal Length (cm)</label>
                         <span class="metric-value" id="slVal">5.10</span>
                     </div>
                     <input type="range" id="slInput" class="slider-input" min="4.0" max="8.0" step="0.1" value="5.1" oninput="updateLabel('slVal', this.value)">
@@ -113,7 +104,7 @@
 
                 <div class="control-group">
                     <div class="control-header">
-                        <label for="plInput">Petal Length</label>
+                        <label for="plInput">Petal Length (cm)</label>
                         <span class="metric-value" id="plVal">1.40</span>
                     </div>
                     <input type="range" id="plInput" class="slider-input" min="1.0" max="7.0" step="0.1" value="1.4" oninput="updateLabel('plVal', this.value)">
@@ -121,7 +112,7 @@
 
                 <div class="control-group">
                     <div class="control-header">
-                        <label for="swInput">Sepal Width</label>
+                        <label for="swInput">Sepal Width (cm)</label>
                         <span class="metric-value" id="swVal">3.50</span>
                     </div>
                     <input type="range" id="swInput" class="slider-input" min="2.0" max="5.5" step="0.1" value="3.5" oninput="updateLabel('swVal', this.value)">
@@ -129,7 +120,7 @@
 
                 <div class="control-group">
                     <div class="control-header">
-                        <label for="pwInput">Petal Width</label>
+                        <label for="pwInput">Petal Width (cm)</label>
                         <span class="metric-value" id="pwVal">0.20</span>
                     </div>
                     <input type="range" id="pwInput" class="slider-input" min="0.1" max="3.0" step="0.1" value="0.2" oninput="updateLabel('pwVal', this.value)">
@@ -157,7 +148,6 @@
             <div class="footer-dev">🚀 Developed by Krish Goel</div>
             <a href="mailto:krishgoel199@gmail.com" class="footer-email">krishgoel199@gmail.com</a>
         </footer>
-
     </div>
 
     <script>
@@ -182,17 +172,17 @@
 
             fetch(`/predict?sl=${sl}&sw=${sw}&pl=${pl}&pw=${pw}`)
                 .then(response => response.text())
-                .then(predictedSpecies => {
-                    resLabel.innerText = predictedSpecies;
-                    
-                    // Simple deterministic baseline mapping for confidence rendering based on typical Iris thresholds
-                    let confidence = "100%";
-                    if ((sl > 6.0 && predictedSpecies === "setosa") || (pl < 3.0 && predictedSpecies === "virginica")) {
-                        confidence = "80%";
+                .then(responseText => {
+                    if(responseText.includes(",")) {
+                        const dataParts = responseText.split(",");
+                        resLabel.innerText = dataParts[0];
+                        confLabel.innerText = dataParts[1];
+                        confBox.style.display = "block";
+                    } else {
+                        resLabel.innerText = responseText;
+                        confLabel.innerText = "100%";
+                        confBox.style.display = "block";
                     }
-                    
-                    confLabel.innerText = confidence;
-                    confBox.style.display = "block";
                 })
                 .catch(error => {
                     resLabel.innerText = "Error reaching calculation engine.";
